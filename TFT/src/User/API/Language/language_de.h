@@ -97,7 +97,7 @@
     #define DE_1_PERCENT            "1%"
     #define DE_5_PERCENT            "5%"
     #define DE_10_PERCENT           "10%"
-    #define DE_READY                "Bereit"
+    #define DE_READY                READY_MSG
     #define DE_BUSY                 "Bitte warten..."
     #define DE_UNCONNECTED          "Keine Verbindung zum Drucker!"
     #define DE_DISCONNECT_INFO      "Verbindung getrennt!"

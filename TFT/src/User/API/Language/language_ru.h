@@ -97,7 +97,7 @@
     #define RU_1_PERCENT            "1%"
     #define RU_5_PERCENT            "5%"
     #define RU_10_PERCENT           "10%"
-    #define RU_READY                "Готов"
+    #define RU_READY                READY_MSG
     #define RU_BUSY                 "Система занята..."
     #define RU_UNCONNECTED          "Нет подкл.!"
     #define RU_DISCONNECT_INFO      "Now you can control the printer by your computer!"

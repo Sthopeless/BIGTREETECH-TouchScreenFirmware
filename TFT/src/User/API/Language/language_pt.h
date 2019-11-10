@@ -97,7 +97,7 @@
     #define PT_1_PERCENT            "1%"
     #define PT_5_PERCENT            "5%"
     #define PT_10_PERCENT           "10%"
-    #define PT_READY                "Pronto"
+    #define PT_READY                READY_MSG
     #define PT_BUSY                 "Em processamento, aguarde..."
     #define PT_UNCONNECTED          "Nenhuma impressora conectada!"
     #define PT_DISCONNECT_INFO      "Agora podes controlar a impressora com o computador!" 

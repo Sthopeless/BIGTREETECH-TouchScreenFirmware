@@ -97,7 +97,7 @@
     #define TUGA_1_PERCENT            "1%"
     #define TUGA_5_PERCENT            "5%"
     #define TUGA_10_PERCENT           "10%"
-    #define TUGA_READY                "Pronto"
+    #define TUGA_READY                READY_MSG
     #define TUGA_BUSY                 "Em processamento, aguarde..."
     #define TUGA_UNCONNECTED          "Nenhuma impressora conectada!"
     #define TUGA_DISCONNECT_INFO      "Agora podes controlar a impressora com o computador!" 

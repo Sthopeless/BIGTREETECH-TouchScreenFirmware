@@ -97,7 +97,7 @@
     #define ES_1_PERCENT            "1%"
     #define ES_5_PERCENT            "5%"
     #define ES_10_PERCENT           "10%"
-    #define ES_READY                "Listo"
+    #define ES_READY                READY_MSG
     #define ES_BUSY                 "Procesamiento ocupado, por favor espere ..."
     #define ES_UNCONNECTED          "No hay comunicacion con impresora!"
     #define ES_DISCONNECT_INFO      "Ahora puede controlar la impresora desde su ordenador!"

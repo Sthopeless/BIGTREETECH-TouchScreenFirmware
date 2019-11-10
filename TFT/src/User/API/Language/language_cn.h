@@ -97,7 +97,7 @@
     #define CN_1_PERCENT            "1%"
     #define CN_5_PERCENT            "5%"
     #define CN_10_PERCENT           "10%"
-    #define CN_READY                "准备打印"
+    #define CN_READY                READY_MSG
     #define CN_BUSY                 "系统繁忙,请稍候..."
     #define CN_UNCONNECTED          "未连接到打印机!"
     #define CN_DISCONNECT_INFO      "现在可以用电脑控制打印机"

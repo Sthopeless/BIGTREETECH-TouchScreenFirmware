@@ -97,7 +97,7 @@
     #define AM_1_PERCENT            "1%"
     #define AM_5_PERCENT            "5%"
     #define AM_10_PERCENT           "10%"
-    #define AM_READY                "Պատրաստ"
+    #define AM_READY                READY_MSG
     #define AM_BUSY                 "Ծանրաբեռնված է"
     #define AM_UNCONNECTED          "Տպիչը կցված չէ"
     #define AM_DISCONNECT_INFO      "Now you can control the printer by your computer!"

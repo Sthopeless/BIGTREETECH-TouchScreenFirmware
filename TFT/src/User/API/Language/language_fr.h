@@ -97,7 +97,7 @@
     #define FR_1_PERCENT            "1%"
     #define FR_5_PERCENT            "5%"
     #define FR_10_PERCENT           "10%"
-    #define FR_READY                "Prêt"
+    #define FR_READY                READY_MSG
     #define FR_BUSY                 "     Occupé, veuillez attendre..."
     #define FR_UNCONNECTED          "L'imprimante n'est pas reliée!"
     #define FR_DISCONNECT_INFO      "Vous pouvez maintenant piloter par l'ordinateur!"
