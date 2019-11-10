@@ -108,11 +108,11 @@
 
 // Enable alternative Move Menu Buttons Layout for easy
 // update the icons from alternate icon folder
-#define ALTERNATIVE_MOVE_MENU
+//#define ALTERNATIVE_MOVE_MENU
 
 // Enable Unified Move Menu
 // Move, Home, Extrude, ABL at one Place and bring Gcode Menu and
-#define UNIFIED_MENU
+//#define UNIFIED_MENU
 
 // SD support
 #define ONBOARD_SD_SUPPORT
