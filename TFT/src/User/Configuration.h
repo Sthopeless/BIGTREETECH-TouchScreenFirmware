@@ -13,7 +13,7 @@
  * Current color options from lcd.h: BLACK, BLUE, BROWN, BRRED, CYAN, GBLUE, GRAY, GREEN, MAGENTA, RED, WHITE, YELLOW
  */
 
-#define READY_MSG "          BIQU Legend"
+#define READY_MSG "             BIQU Legend"
 // Marlin Mode Background & Font Color Options
 // Current color options from lcd.h: BLACK, BLUE, BROWN, BRRED, CYAN, GBLUE, GRAY, GREEN, MAGENTA, RED, WHITE, YELLOW
 #define ST7920_BKCOLOR BLACK
