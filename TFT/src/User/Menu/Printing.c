@@ -259,15 +259,15 @@ const GUI_RECT progressRect = {1*SPACE_X_PER_ICON, 0*ICON_HEIGHT+0*SPACE_Y+TITLE
 #define TIME_Y (TEMP_Y + 1 * BYTE_HEIGHT + 3)
 void reValueNozzle(void)
 {
-  GUI_DispString(progressRect.x0, TEMP_Y, (u8* )heatDisplayID[heatGetCurrentToolNozzle()], 1);
-  GUI_DispDec(progressRect.x0+BYTE_WIDTH*3, TEMP_Y, heatGetCurrentTemp(heatGetCurrentToolNozzle()), 3, 1, RIGHT);
-  GUI_DispDec(progressRect.x0+BYTE_WIDTH*7, TEMP_Y, heatGetTargetTemp(heatGetCurrentToolNozzle()),  3, 1, LEFT);
+  GUI_DispString(progressRect.x0, TEMP_Y, (u8* )heatDisplayID[heatGetCurrentToolNozzle()]);
+  GUI_DispDec(progressRect.x0+BYTE_WIDTH*3, TEMP_Y, heatGetCurrentTemp(heatGetCurrentToolNozzle()), 3, RIGHT);
+  GUI_DispDec(progressRect.x0+BYTE_WIDTH*7, TEMP_Y, heatGetTargetTemp(heatGetCurrentToolNozzle()),  3, LEFT);
 }
 
 void reValueBed(void)
 {
-  GUI_DispDec(BED_X + 2 * BYTE_WIDTH, TEMP_Y, heatGetCurrentTemp(BED), 3, 1, RIGHT);
-  GUI_DispDec(BED_X + 6 * BYTE_WIDTH, TEMP_Y, heatGetTargetTemp(BED),  3, 1, LEFT);
+  GUI_DispDec(BED_X + 2 * BYTE_WIDTH, TEMP_Y, heatGetCurrentTemp(BED), 3, RIGHT);
+  GUI_DispDec(BED_X + 6 * BYTE_WIDTH, TEMP_Y, heatGetTargetTemp(BED),  3, LEFT);
 }
 
 void reDrawTime(void)
@@ -275,13 +275,11 @@ void reDrawTime(void)
   u8  hour = infoPrinting.time/3600,
       min = infoPrinting.time%3600/60,
       sec = infoPrinting.time%60;
-
-  GUI_DispChar(progressRect.x0 + 2 * BYTE_WIDTH, TIME_Y, hour/10%10+'0',1);
-  GUI_DispChar(progressRect.x0 + 3 * BYTE_WIDTH, TIME_Y, hour%10+'0', 1);
-  GUI_DispChar(progressRect.x0 + 5 * BYTE_WIDTH, TIME_Y, min/10+'0',1);
-  GUI_DispChar(progressRect.x0 + 6 * BYTE_WIDTH, TIME_Y, min%10+'0',1);
-  GUI_DispChar(progressRect.x0 + 8 * BYTE_WIDTH, TIME_Y, sec/10+'0',1);
-  GUI_DispChar(progressRect.x0 + 9 * BYTE_WIDTH, TIME_Y, sec%10+'0',1);
+  GUI_SetNumMode(GUI_NUMMODE_ZERO);
+  GUI_DispDec(progressRect.x0 + 2 * BYTE_WIDTH, TIME_Y, hour, 2, RIGHT);
+  GUI_DispDec(progressRect.x0 + 5 * BYTE_WIDTH, TIME_Y, min, 2, RIGHT);
+  GUI_DispDec(progressRect.x0 + 8 * BYTE_WIDTH, TIME_Y, sec, 2, RIGHT);
+  GUI_SetNumMode(GUI_NUMMODE_SPACE);
 }
 
 void reDrawProgress(u8 progress)
@@ -291,7 +289,9 @@ void reDrawProgress(u8 progress)
   GUI_FillRectColor(progressRect.x0, progressRect.y0, progressX, progressRect.y1,BLUE);
   GUI_FillRectColor(progressX, progressRect.y0, progressRect.x1, progressRect.y1,GRAY);
   my_sprintf(buf, "%d%%", progress);
-  GUI_DispStringInPrect(&progressRect, (u8 *)buf, 0);                         
+  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+  GUI_DispStringInPrect(&progressRect, (u8 *)buf);    
+  GUI_SetTextMode(GUI_TEXTMODE_NORMAL);                     
 }
 
 extern SCROLL   titleScroll;
@@ -312,19 +312,17 @@ void printingDrawPage(void)
 {
   menuDrawPage(&printingItems);
   //	Scroll_CreatePara(&titleScroll, infoFile.title,&titleRect);  //
-  GUI_DispLenString(titleRect.x0, titleRect.y0, 
-                    getCurGcodeName(infoFile.title), 1, 
-                   (titleRect.x1 - titleRect.x0) );
+  GUI_DispLenString(titleRect.x0, titleRect.y0, getCurGcodeName(infoFile.title), (titleRect.x1 - titleRect.x0));
   // printed time
-  GUI_DispString(progressRect.x0, TIME_Y, (u8* )"T:", 0);
-  GUI_DispChar(progressRect.x0+BYTE_WIDTH*4, TIME_Y, ':', 0);
-  GUI_DispChar(progressRect.x0+BYTE_WIDTH*7, TIME_Y, ':', 0);
+  GUI_DispString(progressRect.x0, TIME_Y, (u8* )"T:");
+  GUI_DispString(progressRect.x0+BYTE_WIDTH*4, TIME_Y, (u8* )":");
+  GUI_DispString(progressRect.x0+BYTE_WIDTH*7, TIME_Y, (u8* )":");
   // nozzle temperature 
-  GUI_DispString(progressRect.x0+BYTE_WIDTH*2, TEMP_Y,(u8* )":",0);
-  GUI_DispChar(progressRect.x0+BYTE_WIDTH*6, TEMP_Y,'/',0);
+  GUI_DispString(progressRect.x0+BYTE_WIDTH*2, TEMP_Y,(u8* )":");
+  GUI_DispString(progressRect.x0+BYTE_WIDTH*6, TEMP_Y,(u8* )"/");
   // hotbed temperature
-  GUI_DispString(BED_X, TEMP_Y,(u8* )"B:",0);
-  GUI_DispChar(BED_X+BYTE_WIDTH*5, TEMP_Y,'/',0);
+  GUI_DispString(BED_X, TEMP_Y, (u8* )"B:");
+  GUI_DispString(BED_X+BYTE_WIDTH*5, TEMP_Y, (u8* )"/");
   reDrawProgress(infoPrinting.progress);
   reValueNozzle();
   reValueBed();
@@ -344,7 +342,7 @@ void menuPrinting(void)
 
   while(infoMenu.menu[infoMenu.cur] == menuPrinting)
   {		
-//    Scroll_DispString(&titleScroll,1,LEFT); //Scroll display file name will take too many CPU cycles
+//    Scroll_DispString(&titleScroll, LEFT); //Scroll display file name will take too many CPU cycles
 
     if( infoPrinting.size != 0)
     {
@@ -453,7 +451,9 @@ void completePrinting(void)
 {
   endPrinting();  
   if(infoSettings.auto_off) // Auto shut down after printing
-    mustStoreCmd("M81\n");
+  {
+		infoMenu.menu[++infoMenu.cur] = menuShutDown;
+  }
 }
 
 void haltPrinting(void)
@@ -493,11 +493,60 @@ void menuStopPrinting(void)
       case KEY_POPUP_CONFIRM:
         haltPrinting();
         infoMenu.cur-=2;
-      break;
+        break;
 
       case KEY_POPUP_CANCEL:
         infoMenu.cur--;
         break;		
+    }
+    loopProcess();
+  }
+}
+
+// Shut down menu, when the hotend temperature is higher than "AUTO_SHUT_DOWN_MAXTEMP"
+// wait for cool down, in the meantime, you can shut down by force
+void menuShutDown(void)
+{
+  bool tempIsLower;
+  u16 key_num = IDLE_TOUCH;
+
+  popupDrawPage(bottomDoubleBtn, textSelect(LABEL_SHUT_DOWN), textSelect(LABEL_WAIT_TEMP_SHUT_DOWN), textSelect(LABEL_FORCE_SHUT_DOWN), textSelect(LABEL_CANNEL));
+ 
+  for(u8 i = 0; i < FAN_NUM; i++)
+  {
+    mustStoreCmd("%s S255\n", fanCmd[i]);  
+  }
+  while (infoMenu.menu[infoMenu.cur] == menuShutDown)
+  {
+    key_num = KEY_GetValue(2, doubleBtnRect);
+    switch(key_num)
+    {
+      case KEY_POPUP_CONFIRM:
+        goto shutdown;
+
+      case KEY_POPUP_CANCEL:
+        infoMenu.cur--;
+        break;		
+    }
+    tempIsLower = true;
+    for (TOOL i = NOZZLE0; i < HEATER_NUM; i++)
+    {
+      if(heatGetCurrentTemp(NOZZLE0) >= AUTO_SHUT_DOWN_MAXTEMP)
+        tempIsLower = false;
+    }
+    if(tempIsLower)
+    {   
+      shutdown:
+        for(u8 i = 0; i < FAN_NUM; i++)
+        {
+          mustStoreCmd("%s S0\n", fanCmd[i]);  
+        }
+        mustStoreCmd("M81\n");
+        popupDrawPage(NULL, textSelect(LABEL_SHUT_DOWN), textSelect(LABEL_SHUTTING_DOWN), NULL, NULL);
+        while(1)
+        {
+          loopProcess();
+        }
     }
     loopProcess();
   }
