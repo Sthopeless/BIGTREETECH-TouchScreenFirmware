@@ -119,3 +119,4 @@ cmake-build-*
 .pydevproject
 .settings
 .classpath
+TFT35_V2 Bootloader fix/FlyMcuConfig.ini
